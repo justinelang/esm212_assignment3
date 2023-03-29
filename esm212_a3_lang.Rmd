@@ -1,0 +1,41 @@
+---
+title: "Assignment 3"
+author: "Justine Lang"
+date: "2023-03-29"
+output: 
+  html_document: 
+    code_folding: hide
+---
+
+```{r setup, echo = TRUE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+library(ggplot2)
+library(tidyverse)
+library(PASWR)
+library(mra)
+library(janitor)
+library(here)
+```
+
+
+## Unburned
+
+```{r}
+PM_unburned <- read_csv(here("data", "PM_unburned.csv"))
+
+PM_unburned$X <- NULL
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
