@@ -453,8 +453,8 @@ library(PASWR)
 library(mra)
 library(janitor)
 library(here)</code></pre>
-<div id="estmated-population-size" class="section level2">
-<h2>Estmated Population Size</h2>
+<div id="estimated-population-size" class="section level2">
+<h2>1) Estimated Population Size</h2>
 <div id="unburned" class="section level3">
 <h3>Unburned</h3>
 <p><strong><em>Peromyscus</em></strong></p>
@@ -487,10 +487,11 @@ PMPop_unburned</code></pre>
 ## Deviance =  45.7332562051268
 ## AIC =  47.7332562051268
 ## AICc =  47.8509032639504</code></pre>
+<p>Unburned estimated population size: 12.8397, se = 1.142</p>
+<p>sd: 3.956004</p>
 <pre class="r"><code># 12.8397, se=1.142
 #calculate the SD from the se (se * sqrt(n)) for later use in t-tests comparing means
-  1.142*sqrt(12) # = 3.956004 #SD</code></pre>
-<pre><code>## [1] 3.956004</code></pre>
+  # 1.142*sqrt(12) # = 3.956004 #SD</code></pre>
 <p><strong><em>Neotoma fuscipes</em></strong></p>
 <pre class="r"><code>NF_unburned &lt;- read_csv(here(&quot;data&quot;, &quot;NF_unburned.csv&quot;))
 
@@ -520,9 +521,10 @@ NFPop_unburned</code></pre>
 ## Deviance =  45.5082418370149
 ## AIC =  47.5082418370149
 ## AICc =  47.6258888958384</code></pre>
+<p>Unburned estimated population size: 15.7082, se = 3.3714</p>
+<p>sd: 11.67887</p>
 <pre class="r"><code>### 15.7082 se = 3.3714
-3.3714*sqrt(12) ### = 11.67887 #SD</code></pre>
-<pre><code>## [1] 11.67887</code></pre>
+# 3.3714*sqrt(12) ### = 11.67887 #SD</code></pre>
 <p><strong><em>Sceloporus occidentalis</em></strong></p>
 <pre class="r"><code>SO_unburned &lt;- read_csv(here(&quot;data&quot;, &quot;SO_unburned.csv&quot;))
 
@@ -552,9 +554,10 @@ SOPop_unburned</code></pre>
 ## Deviance =  353.219789755778
 ## AIC =  355.219789755778
 ## AICc =  355.234827349763</code></pre>
+<p>Unburned estimated population size: 77.9106, se = 4.6508</p>
+<p>sd: 38.06844</p>
 <pre class="r"><code>### 77.9106 se = 4.6508
-4.6508*sqrt(67) ### = 38.06844 #SD</code></pre>
-<pre><code>## [1] 38.06844</code></pre>
+# 4.6508*sqrt(67) ### = 38.06844 #SD</code></pre>
 </div>
 <div id="burned" class="section level3">
 <h3>Burned</h3>
@@ -587,9 +590,10 @@ PMPop_burned</code></pre>
 ## Deviance =  38.9140230703516
 ## AIC =  40.9140230703516
 ## AICc =  41.0568802132087</code></pre>
+<p>Burned estimated population size: 11.5019, se = 1.7525</p>
+<p>sd: 5.541892</p>
 <pre class="r"><code>### 11.5019 se = 1.7525
-1.7525*sqrt(10) ### = 5.541892 #SD</code></pre>
-<pre><code>## [1] 5.541892</code></pre>
+# 1.7525*sqrt(10) ### = 5.541892 #SD</code></pre>
 <p><strong><em>Sceloporus occidentalis</em></strong></p>
 <pre class="r"><code>SO_burned &lt;- read_csv(here(&quot;data&quot;, &quot;SO_burned.csv&quot;))
 
@@ -619,14 +623,17 @@ SOPop_burned</code></pre>
 ## Deviance =  272.44334543154
 ## AIC =  274.44334543154
 ## AICc =  274.461694055394</code></pre>
+<p>Burned estimated population size: 73.2445, se = 7.3587</p>
+<p>sd: 54.57358</p>
 <pre class="r"><code>### 73.2445 se = 7.3587
-7.3587*sqrt(55) ### = 54.57358 #SD</code></pre>
-<pre><code>## [1] 54.57358</code></pre>
+# 7.3587*sqrt(55) ### = 54.57358 #SD</code></pre>
 </div>
 </div>
 <div id="t-test-comparision" class="section level2">
-<h2>T-Test Comparision</h2>
+<h2>2) T-Test Comparision</h2>
 <p><strong><em>Peromyscus</em></strong></p>
+<p>No significant difference between the population estimates for the
+burned and unburned plots (p = 0.56).</p>
 <pre class="r"><code>###compare P. maniculatus populations between unburned (x) and burned (y)
 
 PM_ttest &lt;- tsum.test(mean.x=12.8397, s.x=3.956004, n.x=9, mean.y=11.5019, s.y=5.541892, n.y=9, alternative=&quot;two.sided&quot;, mu=0, var.equal=T, conf.level=0.95)
@@ -644,9 +651,12 @@ PM_ttest # No, not significantly different n.x=9, n.y=9: 3 grids trapped for 3 n
 ## mean of x mean of y 
 ##   12.8397   11.5019</code></pre>
 <p><strong><em>Neotoma fuscipes</em></strong></p>
+<p>There is a significant difference between the population estimates
+for the burned and unburned plots (p = 0.0009). Notably, no <em>Neotoma
+fuscipes</em> were trapped in the burned plots.</p>
 <pre class="r"><code>NF_ttest &lt;- tsum.test(mean.x=15.7082, s.x=11.67887, n.x=9, mean.y=0, s.y=0, n.y=9, alternative=&quot;two.sided&quot;, mu=0, var.equal=T, conf.level=0.95)
 
-NF_ttest ###signficantly different</code></pre>
+NF_ttest ###significantly different</code></pre>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -659,24 +669,41 @@ NF_ttest ###signficantly different</code></pre>
 ## mean of x mean of y 
 ##   15.7082    0.0000</code></pre>
 <p><strong><em>Sceloporus occidentalis</em></strong></p>
-<pre class="r"><code>SO_ttest &lt;- tsum.test(mean.x=77.9106, s.x=4.6508, n.x=12, mean.y=73.2445, s.y=7.3587, n.y=12, alternative=&quot;two.sided&quot;, mu=0, var.equal=T, conf.level=0.95)
+<p>No significant difference between the population estimates for the
+burned and unburned plots (p = 0.81).</p>
+<pre class="r"><code>SO_ttest &lt;- tsum.test(mean.x=77.9106, s.x=38.06844, n.x=12, mean.y=73.2445, s.y=54.57358, n.y=12, alternative=&quot;two.sided&quot;, mu=0, var.equal=T, conf.level=0.95)
 
 SO_ttest ###not significantly different</code></pre>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
 ## data:  User input summarized values for x and y
-## t = 1.8568, df = 22, p-value = 0.07678
+## t = 0.24292, df = 22, p-value = 0.8103
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.5454873  9.8776873
+##  -35.16937  44.50157
 ## sample estimates:
 ## mean of x mean of y 
 ##   77.9106   73.2445</code></pre>
 </div>
 <div id="sources-of-uncertainty" class="section level2">
-<h2>Sources of Uncertainty</h2>
-<p>Text here.</p>
+<h2>3) Sources of Uncertainty</h2>
+<p><strong>From what you have learned about mark-recapture and animal
+behavior, briefly discuss the main sources of uncertainty in such a
+mark-recapture survey and how you might change our method (sampling or
+modeling approach) to reduce these uncertainties.</strong></p>
+<p>This closed population mark-recapture model works with the assumption
+that capture and recapture probabilities are equal and do not differ
+based on age, sex, prior capture history, or other factors. This
+assumption may not necessarily be true since there can be individual
+heterogeneity between animals. Some individuals may be more prone to
+capture than others, with some growing “trap-happy,” while some
+individuals may be less prone to capture than others, potentially
+growing “trap-shy.” This heterogeneity could lead to populations being
+over- or underestimated. While more complicated, incorporating the
+assumption that individuals may differ in capture probability and that
+capture and recapture probabilities might not be the same could help
+reduce uncertainty.</p>
 </div>
 
 

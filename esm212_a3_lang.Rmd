@@ -19,7 +19,7 @@ library(here)
 ```
 
 
-## Estmated Population Size
+## 1) Estimated Population Size
 
 ### Unburned
 
@@ -42,10 +42,14 @@ PMPop_unburned <- F.huggins.estim(capture = ~1, recapture = NULL, PM_unburned_ma
 PMPop_unburned
 ```
 
+Unburned estimated population size: 12.8397, se = 1.142
+
+sd: 3.956004
+
 ```{r}
 # 12.8397, se=1.142
 #calculate the SD from the se (se * sqrt(n)) for later use in t-tests comparing means
-  1.142*sqrt(12) # = 3.956004 #SD
+  # 1.142*sqrt(12) # = 3.956004 #SD
 ```
 
 
@@ -70,9 +74,13 @@ NFPop_unburned <- F.huggins.estim(capture = ~1, recapture = NULL, NF_unburned_ma
 NFPop_unburned
 ```
 
+Unburned estimated population size: 15.7082, se = 3.3714
+
+sd: 11.67887
+
 ```{r}
 ### 15.7082 se = 3.3714
-3.3714*sqrt(12) ### = 11.67887 #SD
+# 3.3714*sqrt(12) ### = 11.67887 #SD
 ```
 
 
@@ -97,9 +105,13 @@ SOPop_unburned <- F.huggins.estim(capture = ~1, recapture = NULL, SO_unburned_ma
 SOPop_unburned
 ```
 
+Unburned estimated population size: 77.9106, se = 4.6508
+
+sd: 38.06844
+
 ```{r}
 ### 77.9106 se = 4.6508
-4.6508*sqrt(67) ### = 38.06844 #SD
+# 4.6508*sqrt(67) ### = 38.06844 #SD
 ```
 
 
@@ -126,9 +138,13 @@ PMPop_burned <- F.huggins.estim(capture = ~1, recapture = NULL, PM_burned_ma)
 PMPop_burned
 ```
 
+Burned estimated population size: 11.5019, se = 1.7525
+
+sd: 5.541892
+
 ```{r}
 ### 11.5019 se = 1.7525
-1.7525*sqrt(10) ### = 5.541892 #SD
+# 1.7525*sqrt(10) ### = 5.541892 #SD
 ```
 
 
@@ -153,16 +169,22 @@ SOPop_burned <- F.huggins.estim(capture = ~1, recapture = NULL, SO_burned_ma)
 SOPop_burned
 ```
 
+Burned estimated population size: 73.2445, se = 7.3587
+
+sd: 54.57358
+
 ```{r}
 ### 73.2445 se = 7.3587
-7.3587*sqrt(55) ### = 54.57358 #SD
+# 7.3587*sqrt(55) ### = 54.57358 #SD
 ```
 
 
-## T-Test Comparision
+## 2) T-Test Comparision
 
 
 ***Peromyscus***
+
+No significant difference between the population estimates for the burned and unburned plots (p = 0.56). 
 
 ```{r}
 ###compare P. maniculatus populations between unburned (x) and burned (y)
@@ -175,25 +197,32 @@ PM_ttest # No, not significantly different n.x=9, n.y=9: 3 grids trapped for 3 n
 
 ***Neotoma fuscipes***
 
+There is a significant difference between the population estimates for the burned and unburned plots (p = 0.0009). Notably, no *Neotoma fuscipes* were trapped in the burned plots. 
+
 ```{r}
 NF_ttest <- tsum.test(mean.x=15.7082, s.x=11.67887, n.x=9, mean.y=0, s.y=0, n.y=9, alternative="two.sided", mu=0, var.equal=T, conf.level=0.95)
 
-NF_ttest ###signficantly different
+NF_ttest ###significantly different
 ```
 
 
 ***Sceloporus occidentalis***
 
+No significant difference between the population estimates for the burned and unburned plots (p = 0.81).
+
 ```{r}
-SO_ttest <- tsum.test(mean.x=77.9106, s.x=4.6508, n.x=12, mean.y=73.2445, s.y=7.3587, n.y=12, alternative="two.sided", mu=0, var.equal=T, conf.level=0.95)
+SO_ttest <- tsum.test(mean.x=77.9106, s.x=38.06844, n.x=12, mean.y=73.2445, s.y=54.57358, n.y=12, alternative="two.sided", mu=0, var.equal=T, conf.level=0.95)
 
 SO_ttest ###not significantly different
 ```
 
 
-## Sources of Uncertainty
+## 3) Sources of Uncertainty
 
-Text here. 
+**From what you have learned about mark-recapture and animal behavior, briefly discuss the main sources of uncertainty in such a mark-recapture survey and how you might change our method (sampling or modeling approach) to reduce these uncertainties.**
+
+This closed population mark-recapture model works with the assumption that capture and recapture probabilities are equal and do not differ based on age, sex, prior capture history, or other factors. This assumption may not necessarily be true since there can be individual heterogeneity between animals. Some individuals may be more prone to capture than others, with some growing "trap-happy," while some individuals may be less prone to capture than others, potentially growing "trap-shy." This heterogeneity could lead to populations being over- or underestimated. While more complicated, incorporating the assumption that individuals may differ in capture probability and that capture and recapture probabilities might not be the same could help reduce uncertainty. 
+
 
 
 
